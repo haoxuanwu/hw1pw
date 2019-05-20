@@ -1,0 +1,42 @@
+#' Basic arithmetic
+#'
+#' Add or subtract two numbers
+#'
+#' @param x The first number
+#' @param y The second number
+#'
+#' @details Returns \code{NA} if either \code{x} or \code{y} is \code{NA}
+#'
+#' @return The sum or difference of x and y
+#' @export
+#'
+#' @examples add(1,2)
+#' subtract(1,2)
+add = function(x,y) {
+  return(x+y)
+}
+
+
+
+#' @rdname add
+#'
+#' @export
+subtract = function(x,y) {
+  return(x-y)
+}
+
+
+#' Cross validated elastic net
+#'
+#' @param x The covariate
+#' @param y he response
+#'
+#' @return The Cross validated lasso fitted with x and y
+#' @export
+#'
+#' @seealso \code{\link[glmnet]{cv.glmnet}}
+#'
+#' @examples myGlmnet(cbind(rnorm(10),rnorm(10)), rnorm(10))
+myGlmnet = function(x,y) {
+  return(glmnet::cv.glmnet(x,y))
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1557936431527.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "8|1|168|0|\n51|50|70|0|\n72|44|92|0|\n94|48|115|0|\n",
+    "hash" : "0",
+    "id" : "FC585BC6",
+    "lastKnownWriteTime" : 1558327886,
+    "last_content_update" : 1558329934753,
+    "path" : "~/Documents/Grad Study/STSCI 6520/Homework 1/homework1.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "249,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

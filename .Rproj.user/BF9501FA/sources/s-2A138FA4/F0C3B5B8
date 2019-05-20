@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1557936385116.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "27|86|40|0|\n42|50|63|0|\n65|44|87|0|\n89|61|113|0|\n134|57|142|0|\n144|39|155|0|\n157|38|169|0|\n192|58|210|0|\n",
+    "hash" : "0",
+    "id" : "F0C3B5B8",
+    "lastKnownWriteTime" : 1558330667,
+    "last_content_update" : 1558330709019,
+    "path" : "~/Documents/Grad Study/STSCI 6520/Homework 2/hw1pw/R/hello.R",
+    "project_path" : "R/hello.R",
+    "properties" : {
+        "cursorPosition" : "9,43",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
