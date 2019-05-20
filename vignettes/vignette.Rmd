@@ -1,0 +1,71 @@
+---
+title: "hw1pw"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{hw1pw}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is the package for homework 2 for STSCI 6520. To install the package, please use the following commands:
+
+```{r}
+library(devtools)
+install_github("haoxuanwu/hw1pw")
+library(hw1pw)
+```
+
+The library contains 3 functions: solve_ols(), algo_leverage(), elnet_coord().
+
+The first function, solve_ols(), solves a linear system using Gauss-Seidel or Jacobi method. 
+Consider a linear system of equations Ax = b, given n $\times$ n matrix A and the vector B, the function will solve for x. 
+The function has 6 parameters, the required parameters are A and b, as seen in the linear equation above. The optional parameter v is an optional parameter for true value of x. If specified, the function will return a list of relative error. The parameter iteration determines the number of iteration the function will run. The parameter method determines which method to use ("gauss_seidel" for Gauss Seidel, "jacobi" for Jacobi). If one wish to run jacobi in parallel, the parameter no_core specifies number of core. 
+The function will return a list of predicted x, relative error if given v, and time for each iteration. An example is given below
+
+```{r}
+A = matrix(0, nrow = 100, ncol=100)
+diag(A) = rep(3, 100)
+index = seq(1, 99)
+A[cbind(index+1, index)] = rep(-1, 99)
+A[cbind(index, index+1)] = rep(-1, 99)
+v = matrix(rep(1,100), nrow=100)
+b = A %*% v
+gs_output = solve_ols(A, b, v, method="gauss_seidel")
+j_output = solve_ols(A, b, v, method="jacobi")
+```
+
+The second function, algo_leverage(), implements algorithmic leveraging for linear regression using uniform and leverage score based subsampling of rows.  This algorithm attempts to approximate the linear regression coefficient $\hat{\beta}$ in a dataset of sample size n using only a randomly selected subset of size r. 
+The function has 5 parameters. 3 parameters are required, the parameter y specifies the outcome variable matrix, the parameter X specifies the predictor variable matrix, the parameter r specifies the number of subsample to take. The optional parameter plot determines whether a plot of output will be shown. The optional parameter method determines the sampling method: "unif" subsamples the data points uniformly, "lev" subsamples the data points based on the leverage score. 
+The function will return the estimated $\hat{\beta}$ from the subsample. An example is seen below
+
+```{r}
+X = matrix(rt(500, 6), nrow=500)
+ep = matrix(rnorm(500, 0, 1), nrow=500)
+y = -X + ep
+r = 100
+algo_leverage(y, X, r, method="unif")
+algo_leverage(y, X, r, method="lev")
+```
+
+The third function, elnet_coord(), fits an elastic net model to data using coordinate descent algorithm. The function solves the problem $min_{\beta \in R^p}\frac{1}{n} \sum_{i=1}^n (y_i-x_i^T\beta)^2 + \lambda[(1-\alpha)||\beta||_2^2 + \alpha||\beta||_1]$.
+The function has 5 parameters, the 4 required parameters are y, X, alpha and lambda. The y parameter specifies the response variable matrix. The X parameter specifies the predictor variable matrix. The alpha parameter is a value between 0 and 1 indicating weight toward L1 vs L2 shrinkage as seen in equation above. The lambda parameter is the weight parameter for determining significance of the shrinkage parameters as seen in equation above. The optional parameter epsilon determines stopping criterion for convergence of the estimated $\beta$. 
+The function returns the estimated coefficient vector $\beta$.  An example is given below:
+```{r}
+n = 100
+alpha = 1
+eps = matrix(rnorm(n, 0, 1), nrow=n)
+X = mvrnorm(n, mu=rep(0, 20), Sigma = diag(rep(1, 20)))
+X = scale(X)
+beta = matrix(c(2,0,-2,0,1,0,-1,0,rep(0, 12)), nrow=20)
+y = X%*%beta+eps
+elnet_coord(X, y, alpha, 0.05)
+```
+
+
+
