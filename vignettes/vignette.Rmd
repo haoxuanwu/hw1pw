@@ -57,6 +57,7 @@ The third function, elnet_coord(), fits an elastic net model to data using coord
 The function has 5 parameters, the 4 required parameters are y, X, alpha and lambda. The y parameter specifies the response variable matrix. The X parameter specifies the predictor variable matrix. The alpha parameter is a value between 0 and 1 indicating weight toward L1 vs L2 shrinkage as seen in equation above. The lambda parameter is the weight parameter for determining significance of the shrinkage parameters as seen in equation above. The optional parameter epsilon determines stopping criterion for convergence of the estimated $\beta$. 
 The function returns the estimated coefficient vector $\beta$.  An example is given below:
 ```{r}
+library(MASS)
 n = 100
 alpha = 1
 eps = matrix(rnorm(n, 0, 1), nrow=n)
